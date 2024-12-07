@@ -14,11 +14,11 @@
         "custom/media"
     ],
     "modules-right": [
-        "idle_inhibitor",
         "cpu",
         "memory",
         "clock",
         "tray",
+        "custom/wbmenu"
     ],
     "keyboard-state": {
         "numlock": true,
@@ -46,7 +46,8 @@
     "clock": {
         // "timezone": "America/New_York",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}"
+        "format-alt": "{:%I:%M %p}",
+        "format": "{:%I:%M %p}"
     },
     "cpu": {
         "format": "{usage}% ",
@@ -106,5 +107,11 @@
 			"suspend": "systemctl suspend",
 			"hibernate": "systemctl hibernate"
 		}
+    },
+    // CUSTOM
+    "custom/wbmenu": {
+        "format": " 󰍜 ",
+        "tooltop": false,
+        "on-click": "~/.config/hypr/waybar/scripts/wbmenu.sh"
     }
 }

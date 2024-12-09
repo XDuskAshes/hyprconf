@@ -14,10 +14,10 @@ case "$SELECT" in
         hyprshot -m output
         ;;
     "Restart Waybar")
-        ./~/.config/hypr/scripts/wbrestart.sh
+        $HOME/.config/hypr/scripts/wbrestart.sh
         ;;
     "Restart Hyprpaper")
-        ./~/.config/hypr/scripts/hprestart.sh
+        $HOME/.config/hypr/scripts/hprestart.sh
         ;;
     *)
 esac

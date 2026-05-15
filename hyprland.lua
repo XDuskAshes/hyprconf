@@ -1,76 +1,8 @@
 require("mod.env")
-local colors            = require("mod.mocha")
-
-local fileManager       = "dolphin"
-local menu              = "walker"
-local uishell           = "qs"
-local notif_daemon      = "mako"
-local wallpaper_manager = "hyprpaper"
-local lockscreen        = "swaylock --color 322C2E"
-local browser           = "firefox"
-local terminal          = "foot"
-
--- See https://wiki.hypr.land/Configuring/Basics/Monitors/
-hl.monitor({
-    output   = "HDMI-A-1",
-    mode     = "1920x1080@60.00",
-    position = "0x0",
-    scale    = "1",
-})
-
-
----------------------
----- MY PROGRAMS ----
----------------------
-
--- Set programs that you use
--------------------
----- AUTOSTART ----
--------------------
-
--- See https://wiki.hypr.land/Configuring/Basics/Autostart/
-
--- Autostart necessary processes (like notifications daemons, status bars, etc.)
--- Or execute your favorite apps at launch like this:
---
--- hl.on("hyprland.start", function ()
---   hl.exec_cmd(terminal)
---   hl.exec_cmd("nm-applet")
---   hl.exec_cmd("waybar & hyprpaper & firefox")
--- end)
-
-hl.on("hyprland.start", function()
-    hl.exec_cmd("elephant")
-    hl.exec_cmd("walker --gapplication-service")
-    hl.exec_cmd(uishell)
-    hl.exec_cmd(notif_daemon)
-    hl.exec_cmd(wallpaper_manager)
-end)
-
--------------------------------
----- ENVIRONMENT VARIABLES ----
--------------------------------
-
--- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Environment-variables/
-
------------------------
------ PERMISSIONS -----
------------------------
-
--- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Permissions/
--- Please note permission changes here require a Hyprland restart and are not applied on-the-fly
--- for security reasons
-
--- hl.config({
---   ecosystem = {
---     enforce_permissions = true,
---   },
--- })
-
--- hl.permission("/usr/(bin|local/bin)/grim", "screencopy", "allow")
--- hl.permission("/usr/(lib|libexec|lib64)/xdg-desktop-portal-hyprland", "screencopy", "allow")
--- hl.permission("/usr/(bin|local/bin)/hyprpm", "plugin", "allow")
-
+require("mod.monitors")
+require("mod.autostart")
+local programs = require("mod.programs")
+local colors   = require("mod.mocha")
 
 -----------------------
 ---- LOOK AND FEEL ----
@@ -237,12 +169,12 @@ local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 
 -- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
 hl.bind(mainMod .. " + Q", hl.dsp.window.close())
-hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(terminal))
-hl.bind(mainMod .. " + Space", hl.dsp.exec_cmd(menu))
-hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser))
-hl.bind(mainMod .. " + F", hl.dsp.exec_cmd(fileManager))
+hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(programs.terminal))
+hl.bind(mainMod .. " + Space", hl.dsp.exec_cmd(programs.menu))
+hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(programs.browser))
+hl.bind(mainMod .. " + F", hl.dsp.exec_cmd(programs.fileManager))
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd("discord"))
-hl.bind(mainMod .. " + CTRL + L", hl.dsp.exec_cmd(lockscreen))
+hl.bind(mainMod .. " + CTRL + L", hl.dsp.exec_cmd(programs.lockscreen))
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 
 hl.bind(mainMod .. " + SHIFT + M",

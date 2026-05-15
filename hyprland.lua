@@ -1,25 +1,21 @@
--- This is an example Hyprland Lua config file.
--- Refer to the wiki for more information.
--- https://wiki.hypr.land/Configuring/Start/
+require("mod.env")
+local colors            = require("mod.mocha")
 
--- Please note not all available settings / options are set here.
--- For a full list, see the wiki
-
--- You can (and should!!) split this configuration into multiple files
--- Create your files separately and then require them like this:
--- require("myColors")
-
-
-------------------
----- MONITORS ----
-------------------
+local fileManager       = "dolphin"
+local menu              = "walker"
+local uishell           = "qs"
+local notif_daemon      = "mako"
+local wallpaper_manager = "hyprpaper"
+local lockscreen        = "swaylock --color 322C2E"
+local browser           = "firefox"
+local terminal          = "foot"
 
 -- See https://wiki.hypr.land/Configuring/Basics/Monitors/
 hl.monitor({
-    output   = "",
-    mode     = "preferred",
-    position = "auto",
-    scale    = "auto",
+    output   = "HDMI-A-1",
+    mode     = "1920x1080@60.00",
+    position = "0x0",
+    scale    = "1",
 })
 
 
@@ -28,11 +24,6 @@ hl.monitor({
 ---------------------
 
 -- Set programs that you use
-local terminal    = "foot"
-local fileManager = "dolphin"
-local menu        = "hyprlauncher"
-
-
 -------------------
 ---- AUTOSTART ----
 -------------------
@@ -48,15 +39,19 @@ local menu        = "hyprlauncher"
 --   hl.exec_cmd("waybar & hyprpaper & firefox")
 -- end)
 
+hl.on("hyprland.start", function()
+    hl.exec_cmd("elephant")
+    hl.exec_cmd("walker --gapplication-service")
+    hl.exec_cmd(uishell)
+    hl.exec_cmd(notif_daemon)
+    hl.exec_cmd(wallpaper_manager)
+end)
 
 -------------------------------
 ---- ENVIRONMENT VARIABLES ----
 -------------------------------
 
 -- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Environment-variables/
-
-hl.env("XCURSOR_SIZE", "24")
-hl.env("HYPRCURSOR_SIZE", "24")
 
 -----------------------
 ----- PERMISSIONS -----
@@ -85,13 +80,13 @@ hl.env("HYPRCURSOR_SIZE", "24")
 hl.config({
     general = {
         gaps_in          = 5,
-        gaps_out         = 20,
+        gaps_out         = 10,
 
         border_size      = 2,
 
         col              = {
-            active_border   = { colors = { "rgba(33ccffee)", "rgba(00ff99ee)" }, angle = 45 },
-            inactive_border = "rgba(595959aa)",
+            active_border   = { colors = { colors.lavender, colors.overlay0 }, angle = 45 },
+            inactive_border = colors.surface0,
         },
 
         -- Set to true to enable resizing windows by clicking and dragging on borders and gaps
@@ -100,7 +95,7 @@ hl.config({
         -- Please see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Tearing/ before you turn this on
         allow_tearing    = false,
 
-        layout           = "dwindle",
+        layout           = "master",
     },
 
     decoration = {
@@ -177,24 +172,12 @@ hl.animation({ leaf = "zoomFactor", enabled = true, speed = 7, bezier = "quick" 
 --     rounding    = 0,
 -- })
 
--- See https://wiki.hypr.land/Configuring/Layouts/Dwindle-Layout/ for more
-hl.config({
-    dwindle = {
-        preserve_split = true, -- You probably want this
-    },
-})
-
 -- See https://wiki.hypr.land/Configuring/Layouts/Master-Layout/ for more
 hl.config({
     master = {
-        new_status = "master",
-    },
-})
-
--- See https://wiki.hypr.land/Configuring/Layouts/Scrolling-Layout/ for more
-hl.config({
-    scrolling = {
-        fullscreen_on_one_column = true,
+        new_status = "slave",
+        orientation = "left",
+        mfact = 0.60
     },
 })
 
@@ -204,8 +187,8 @@ hl.config({
 
 hl.config({
     misc = {
-        force_default_wallpaper = -1,    -- Set to 0 or 1 to disable the anime mascot wallpapers
-        disable_hyprland_logo   = false, -- If true disables the random hyprland logo / anime girl background. :(
+        force_default_wallpaper = 0,    -- Set to 0 or 1 to disable the anime mascot wallpapers
+        disable_hyprland_logo   = true, -- If true disables the random hyprland logo / anime girl background. :(
     },
 })
 
@@ -253,16 +236,18 @@ hl.device({
 local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 
 -- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
-hl.bind(mainMod .. " + Enter", hl.dsp.exec_cmd(terminal))
-local closeWindowBind = hl.bind(mainMod .. " + C", hl.dsp.window.close())
--- closeWindowBind:set_enabled(false)
-hl.bind(mainMod .. " + M",
-    hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
-hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
+hl.bind(mainMod .. " + Q", hl.dsp.window.close())
+hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(terminal))
+hl.bind(mainMod .. " + Space", hl.dsp.exec_cmd(menu))
+hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser))
+hl.bind(mainMod .. " + F", hl.dsp.exec_cmd(fileManager))
+hl.bind(mainMod .. " + D", hl.dsp.exec_cmd("discord"))
+hl.bind(mainMod .. " + CTRL + L", hl.dsp.exec_cmd(lockscreen))
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
-hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
-hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
-hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit")) -- dwindle only
+
+hl.bind(mainMod .. " + SHIFT + M",
+    hl.dsp.exec_cmd(
+        "pkill walker && pkill elephant && command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + left", hl.dsp.focus({ direction = "left" }))

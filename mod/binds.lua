@@ -9,12 +9,8 @@ hl.bind(mainMod .. " + Space", hl.dsp.exec_cmd(programs.menu))
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(programs.browser))
 hl.bind(mainMod .. " + F", hl.dsp.exec_cmd(programs.fileManager))
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd("discord"))
-hl.bind(mainMod .. " + CTRL + L", hl.dsp.exec_cmd(programs.lockscreen))
-hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
-
-hl.bind(mainMod .. " + SHIFT + M",
-    hl.dsp.exec_cmd(
-        "pkill walker && pkill elephant && command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
+hl.bind(mainMod .. " + CTRL + L",
+    hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + left", hl.dsp.focus({ direction = "left" }))

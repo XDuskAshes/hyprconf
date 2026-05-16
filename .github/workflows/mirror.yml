@@ -3,6 +3,7 @@ name: Mirror from Codeberg
 on:
   schedule:
     - cron: "0 12 * * *"
+      timezone: "America/New_York"
   workflow_dispatch:
 
 jobs:

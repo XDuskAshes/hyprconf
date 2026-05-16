@@ -1,4 +1,5 @@
 local programs = require("mod.programs")
+local util = require("mod.util")
 
 hl.on("hyprland.start", function()
     hl.exec_cmd("elephant")
@@ -9,7 +10,7 @@ hl.on("hyprland.start", function()
 end)
 
 hl.on("config.reloaded", function()
-    hl.exec_cmd("notify-send -t 3000 \"Hyprland\" \"Config has been reloaded.\"")
+    util.notify("Hyprland", "Config has been reloaded.")
     hl.exec_cmd("pkill " .. programs.uishell .. " && " .. programs.quickshell)
     hl.exec_cmd("pkill " .. programs.wallpaper_manager .. " && " .. programs.wallpaper_manager)
 end)

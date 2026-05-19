@@ -26,6 +26,12 @@ for i = 1, 10 do
     hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
 end
 
+-- Screenshot
+
+hl.bind("F2", hl.dsp.exec_cmd(programs.screenshot.monitor))
+hl.bind(mainMod .. " + F2", hl.dsp.exec_cmd(programs.screenshot.window))
+hl.bind("F12", hl.dsp.exec_cmd(programs.screenshot.selection))
+
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"),
     { locked = true, repeating = true })
 hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),

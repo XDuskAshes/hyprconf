@@ -4,9 +4,10 @@ local util = require("mod.util")
 hl.on("hyprland.start", function()
     hl.exec_cmd("elephant")
     hl.exec_cmd("walker --gapplication-service")
-    hl.exec_cmd(programs.uishell)
-    hl.exec_cmd(programs.notif_daemon)
-    hl.exec_cmd(programs.wallpaper_manager)
+    for _, prog in pairs(programs.onStart) do
+        print("Running " .. prog .. " on startup.")
+        hl.exec_cmd(prog)
+    end
 end)
 
 hl.on("config.reloaded", function()

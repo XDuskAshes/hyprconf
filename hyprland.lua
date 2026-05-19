@@ -3,6 +3,7 @@ require("mod.monitors")
 require("mod.autostart")
 require("mod.binds")
 require("mod.looks")
+require("mod.windowrules")
 
 hl.config({
     misc = {
@@ -16,23 +17,4 @@ hl.config({
         kb_layout    = "us",
         follow_mouse = 1,
     },
-})
-
-hl.window_rule({
-    name           = "suppress-maximize-events",
-    match          = { class = ".*" },
-    suppress_event = "maximize",
-})
-
-hl.window_rule({
-    name     = "fix-xwayland-drags",
-    match    = {
-        class      = "^$",
-        title      = "^$",
-        xwayland   = true,
-        float      = true,
-        fullscreen = false,
-        pin        = false,
-    },
-    no_focus = true,
 })

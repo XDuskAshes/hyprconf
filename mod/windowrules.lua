@@ -22,5 +22,6 @@ hl.window_rule({
     match = {
         title = "satty"
     },
-    float = true
+    float = true,
+    size = { 1200, 700 }
 })

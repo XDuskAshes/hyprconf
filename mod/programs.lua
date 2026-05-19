@@ -12,7 +12,7 @@ return {
     screenshot  = {
         monitor = "hyprshot -m output --raw | satty --filename -",
         window = "hyprshot -m window --raw | satty --filename -",
-        selection = "hyprshot -m region -- raw | satty --filename -"
+        selection = "hyprshot -m region --raw | satty --filename -"
     },
     onStart     = { -- Stuff that needs to get running immediately
         uishell             = "quickshell",

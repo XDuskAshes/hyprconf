@@ -1,9 +1,5 @@
 local function isEven(num)
-    if (num % 2 == 0) then
-        return true
-    else
-        return false
-    end
+    return num % 2 == 0
 end
 
 local function notify(title, msg)

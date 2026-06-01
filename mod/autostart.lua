@@ -2,8 +2,6 @@ local programs = require("mod.programs")
 local util = require("mod.util")
 
 hl.on("hyprland.start", function()
-    hl.exec_cmd("elephant")
-    hl.exec_cmd("walker --gapplication-service")
     for _, prog in pairs(programs.onStart) do
         print("Running " .. prog .. " on startup.")
         hl.exec_cmd(prog)

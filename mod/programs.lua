@@ -2,7 +2,7 @@ local colors = require("mod.mocha")
 
 return {
     fileManager = "dolphin",
-    menu        = "walker",
+    menu        = "rofi -show drun",
     terminal    = "foot",
     browser     = "firefox",
     lockscreen  = "swaylock --color 322C2E",

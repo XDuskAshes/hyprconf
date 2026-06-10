@@ -15,6 +15,7 @@ hl.config({
 hl.config({
     input = {
         kb_layout    = "us",
+        kb_variant   = "colemak",
         follow_mouse = 1,
     },
 })

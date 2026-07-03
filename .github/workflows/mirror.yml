@@ -2,7 +2,7 @@ name: Mirror from Codeberg
 
 on:
   schedule:
-    - cron: "30 12 * * *"
+    - cron: "30 12 * * MON"
       timezone: "America/New_York"
   workflow_dispatch:
 

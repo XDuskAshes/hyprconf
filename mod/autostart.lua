@@ -6,6 +6,7 @@ hl.on("hyprland.start", function()
         print("Running " .. prog .. " on startup.")
         hl.exec_cmd(prog)
     end
+    hl.exec_cmd("systemctl --user start hyprland-session.target")
 end)
 
 hl.on("config.reloaded", function()
@@ -21,4 +22,5 @@ hl.on("hyprland.shutdown", function()
         hl.exec_cmd("pkill " .. n)
         print("Killing " .. n)
     end
+    os.execute("systemctl --user stop hyprland-session.target && sleep 0.1")
 end)

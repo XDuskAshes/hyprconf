@@ -14,10 +14,6 @@
         lua
         lua-language-server
       ];
-
-      shellHook = ''
-        echo "It's hypr time";
-      '';
     };
   };
 }
